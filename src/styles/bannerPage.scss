@@ -1,0 +1,76 @@
+@import"./mixins.scss";
+
+@keyframes slideFromLeft {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(-0%); }
+}
+@keyframes slideFromRight {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+}
+
+.bannerPageHolder {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+
+    @include tablet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    & .absCoverImage {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        left: 50%;
+        transform: translateX(-50%);
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+
+        }
+    }
+
+    & .welcomeTextLeft, .welcomeTextRight {
+        position: absolute;
+        width: 30%;
+        text-align: center;
+        padding-bottom: 10px 20px;
+        border: 1px solid yellow;
+        box-sizing: border-box;
+        bottom: calc(50% + 100px);
+        background-color: rgba($color: #000000, $alpha: 0.7);
+
+        @include tablet {
+            position: static;
+            width: 100%;
+        }
+    }
+
+    & .welcomeTextLeft {
+        animation: slideFromLeft 0.5s ease-in;
+        left: 0;
+
+        @include tablet {
+            border-bottom: none;
+            animation: none;
+        }
+    }
+
+    & .welcomeTextRight {
+        animation: slideFromRight 0.5s ease-in;
+        right: 0;
+
+        @include tablet {
+            border-top: 10px dashed yellow;
+            animation: none;
+        }
+    }
+}
